@@ -21,3 +21,17 @@ def RunMotor():
         time.sleep(0.02)
         p.ChangeDutyCycle(0)
         time.sleep(0.2)
+
+
+def RunMotor_Fire():
+    atexit.register(GPIO.cleanup)
+    servopin = 7
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(servopin, GPIO.OUT, initial=False)
+    p = GPIO.PWM(servopin,50)
+    p.start(0)
+    for i in range(0,181,10):
+        p.ChangeDutyCycle(2.5 + 10 * i / 180)
+        time.sleep(0.02)
+        p.ChangeDutyCycle(0)
+        time.sleep(0.2)
